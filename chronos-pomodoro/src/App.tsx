@@ -4,11 +4,10 @@ import "./styles/theme.css";
 import "./styles/global.css";
 
 export function App() {
-  console.log("Oi");
-
   return (
     <>
-      <Heading />
+      <Heading> Olá mundo 1</Heading>
+
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis
         nulla accusantium maiores, molestiae voluptas dolores, praesentium
