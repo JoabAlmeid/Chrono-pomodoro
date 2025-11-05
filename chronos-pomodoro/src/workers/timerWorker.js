@@ -1,5 +1,29 @@
-self.onmessage = function (event) {
-  console.log("WORKER recebeu:", event.data);
+let isRunning = false;
 
-  self.postMessage("OLÁ PARA VOCÊ TAMBÈM");
+self.onmessage = function (event) {
+  if (isRunning) return;
+
+  isRunning = true;
+
+  const state = event.data;
+  const { activeTask, secondsRemaining } = state;
+
+  //vezes 1000 por ser milisegundos. Transformamos em segundos
+  const endDate = activeTask.startDate + secondsRemaining * 1000;
+
+  const now = Date.now();
+  //transforma de volta em milisegundos. Faz primeiro aqui pra começar no primeiro seg
+  let countDownSeconds = Math.ceil((endDate - now) / 1000);
+
+  function tick() {
+    self.postMessage(countDownSeconds);
+
+    const now = Date.now();
+    countDownSeconds = Math.floor((endDate - now) / 1000);
+
+    //fica se repetindo num intervalo de 1 segundo
+    setTimeout(tick, 1000);
+  }
+
+  tick();
 };
