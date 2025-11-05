@@ -10,7 +10,7 @@ type TaskContextProviderProps = {
 export function TaskContextProvider({ children }: TaskContextProviderProps) {
   const [state, dispatch] = useReducer(taskReducer, initialTaskState);
 
-  //monitora o state toda vez que state muda
+  //monitora o state toda vez que state muda. colocar cronometro aqui
   useEffect(() => {
     console.log(state);
   }, [state]);
