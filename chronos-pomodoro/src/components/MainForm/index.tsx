@@ -15,6 +15,7 @@ import { toastifyWraper } from "../../adapters/toastifyWraper";
 export function MainForm() {
   const { state, dispatch } = useTaskContext();
   const taskNameInput = useRef<HTMLInputElement>(null);
+  const lastTaskName = state.tasks[state.tasks.length - 1]?.name || "";
 
   //ciclos
   const nextCycle = getNextCycle(state.currentCycle);
@@ -62,10 +63,9 @@ export function MainForm() {
           id="meuInput"
           type="text"
           placeholder="Digite algo"
-          // value={taskName}
-          // onChange={(e) => setTaskName(e.target.value)}
           ref={taskNameInput}
           disabled={!!state.activeTask} //makes it dynamic. Creates an if
+          defaultValue={lastTaskName}
         />
       </div>
 
