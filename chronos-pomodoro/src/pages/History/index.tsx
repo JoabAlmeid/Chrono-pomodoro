@@ -3,6 +3,7 @@ import { Container } from "../../components/Container";
 import { DefaultButton } from "../../components/DefaultButton";
 import { Heading } from "../../components/Heading";
 import { MainTemplate } from "../../templates/MainTemplate";
+import { toastifyWraper } from "../../adapters/toastifyWraper";
 
 import styles from "./styles.module.css";
 import { useTaskContext } from "../../contexts/TaskContext/useTaskContext";
@@ -14,6 +15,7 @@ import { TaskActionTypes } from "../../contexts/TaskContext/TaskActions";
 
 export function History() {
   const { state, dispatch } = useTaskContext();
+  const [confirmClearHistory, setConfirmClearHistory] = useState(false);
   const hasTasks = state.tasks.length > 0;
 
   const [sortTasksOptions, setSortTasksOptions] = useState<SortTasksOptions>(
@@ -38,6 +40,14 @@ export function History() {
     }));
   }, [state.tasks]);
 
+  useEffect(() => {
+    if (!confirmClearHistory) return;
+
+    setConfirmClearHistory(false);
+
+    dispatch({ type: TaskActionTypes.RESET_STATE });
+  }, [confirmClearHistory, dispatch]);
+
   //Pick seleciona um único campo do tipo SortTasksOptions e aloca no novo
   //objeto field. Também pode usar Omit<SortTasksOptions, "tasks" | "directions">
   //mesmo resultado
@@ -56,9 +66,11 @@ export function History() {
   }
 
   function handleResetHistory() {
-    if (!confirm("Tem Certeza")) return;
+    toastifyWraper.dismiss();
 
-    dispatch({ type: TaskActionTypes.RESET_STATE });
+    toastifyWraper.confirm("Tem certeza?", (confirmation) => {
+      setConfirmClearHistory(confirmation);
+    });
   }
 
   return (
