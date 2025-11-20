@@ -48,6 +48,13 @@ export function History() {
     dispatch({ type: TaskActionTypes.RESET_STATE });
   }, [confirmClearHistory, dispatch]);
 
+  //toda vez que o React for renderizar ou desrenderizar algum componente History, fecha a caixinha do toastify
+  useEffect(() => {
+    return () => {
+      toastifyWraper.dismiss();
+    };
+  }, []);
+
   //Pick seleciona um único campo do tipo SortTasksOptions e aloca no novo
   //objeto field. Também pode usar Omit<SortTasksOptions, "tasks" | "directions">
   //mesmo resultado
