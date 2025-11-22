@@ -1,4 +1,5 @@
 import type { TaskModel } from "../../models/TaskModel";
+import type { TaskStateModel } from "../../models/TaskStateModel";
 
 // useReducer <- hook do React que recebe um reducer e um estado inicial
 // reducer <- função que recebe o estado atual e uma ação, e retorna o novo estado
@@ -13,6 +14,7 @@ export enum TaskActionTypes {
   RESET_STATE = "RESET_STATE",
   COUNT_DOWN = "COUNT_DOWN",
   COMPLETE_TASK = "COMPLETE_TASK",
+  CHANGE_SETTINGS = "CHANGE_SETTINGS",
 }
 
 export type TaskActionModelWithPayload =
@@ -23,6 +25,10 @@ export type TaskActionModelWithPayload =
   | {
       type: TaskActionTypes.COUNT_DOWN;
       payload: { secondsRemaining: number };
+    }
+  | {
+      type: TaskActionTypes.CHANGE_SETTINGS;
+      payload: TaskStateModel["config"];
     };
 
 export type TaskActionModelWithoutPayload =

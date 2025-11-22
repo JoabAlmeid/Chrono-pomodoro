@@ -67,5 +67,9 @@ export function taskReducer(
         ),
       };
     }
+    case TaskActionTypes.CHANGE_SETTINGS: {
+      //volta pro valor inicial
+      return { ...state, config: { ...action.payload } };
+    }
   }
 }
