@@ -48,6 +48,10 @@ export function History() {
     dispatch({ type: TaskActionTypes.RESET_STATE });
   }, [confirmClearHistory, dispatch]);
 
+  useEffect(() => {
+    document.title = "Histórico - Chronos Pomodoro";
+  }, []);
+
   //toda vez que o React for renderizar ou desrenderizar algum componente History, fecha a caixinha do toastify
   useEffect(() => {
     return () => {
