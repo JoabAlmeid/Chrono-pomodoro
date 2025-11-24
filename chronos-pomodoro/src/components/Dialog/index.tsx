@@ -1,8 +1,8 @@
-import { ToastContentProps } from 'react-toastify';
-import { DefaultButton } from '../DefaultButton';
-import { ThumbsDownIcon, ThumbsUpIcon } from 'lucide-react';
+import type { ToastContentProps } from "react-toastify";
+import { DefaultButton } from "../DefaultButton";
+import { ThumbsDownIcon, ThumbsUpIcon } from "lucide-react";
 
-import styles from './styles.module.css';
+import styles from "./styles.module.css";
 
 export function Dialog({ closeToast, data }: ToastContentProps<string>) {
   return (
@@ -14,15 +14,15 @@ export function Dialog({ closeToast, data }: ToastContentProps<string>) {
           <DefaultButton
             onClick={() => closeToast(true)}
             icon={<ThumbsUpIcon />}
-            aria-label='Confirmar ação e fechar'
-            title='Confirmar ação e fechar'
+            aria-label="Confirmar ação e fechar"
+            title="Confirmar ação e fechar"
           />
           <DefaultButton
             onClick={() => closeToast(false)}
             icon={<ThumbsDownIcon />}
-            color='red'
-            aria-label='Cancelar ação e fechar'
-            title='Cancelar ação e fechar'
+            color="red"
+            aria-label="Cancelar ação e fechar"
+            title="Cancelar ação e fechar"
           />
         </div>
       </div>

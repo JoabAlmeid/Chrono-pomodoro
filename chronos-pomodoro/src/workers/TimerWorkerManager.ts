@@ -18,6 +18,7 @@ export class TimerWorkerManager {
   }
 
   //colhe a mensagem e aloca no worker
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   postMessage(message: any) {
     this.worker.postMessage(message);
   }
